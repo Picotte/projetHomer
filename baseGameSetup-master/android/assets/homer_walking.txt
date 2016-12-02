@@ -1,0 +1,61 @@
+homer_walking.png
+size: 222, 64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+walking
+  rotate: false
+  xy: 0, 0
+  size: 28, 63
+  orig: 28, 63
+  offset: 0, 0
+  index: 1
+walking
+  rotate: false
+  xy: 28, 0
+  size: 34, 63
+  orig: 34, 63
+  offset: 0, 0
+  index: 2
+walking
+  rotate: false
+  xy: 62, 0
+  size: 30, 62
+  orig: 30, 62
+  offset: 0, 0
+  index: 3
+walking
+  rotate: false
+  xy: 92, 0
+  size: 24, 62
+  orig: 24, 62
+  offset: 0, 0
+  index: 4
+walking
+  rotate: false
+  xy: 116, 0
+  size: 25, 61
+  orig: 25, 61
+  offset: 0, 0
+  index: 5
+walking
+  rotate: false
+  xy: 141, 0
+  size: 33, 63
+  orig: 33, 63
+  offset: 0, 0
+  index: 6
+walking
+  rotate: false
+  xy: 174, 0
+  size: 24, 64
+  orig: 24, 64
+  offset: 0, 0
+  index: 7
+walking
+  rotate: false
+  xy: 198, 0
+  size: 24, 64
+  orig: 24, 64
+  offset: 0, 0
+  index: 8
