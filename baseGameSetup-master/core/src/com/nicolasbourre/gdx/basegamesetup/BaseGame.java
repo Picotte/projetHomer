@@ -2,43 +2,39 @@ package com.nicolasbourre.gdx.basegamesetup;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class BaseGame extends ApplicationAdapter implements InputProcessor {
 
     SpriteBatch batch;
-
+    static final int NB_KEYS = 256;
+    boolean activeKeys[] = new boolean[NB_KEYS];
 
     float deltaTime;
     float elapsedTime = 0;
 
-    Homer homer;
+    GameObject homer;
+
 
 
     @Override
     public void create() {
+
         batch = new SpriteBatch();
-        initActiveKeys();
+        this.initActiveKeys();
+        PlayerGraphicsComponent graphics = new PlayerGraphicsComponent();
+        PlayerPhysicsComponent physics = new PlayerPhysicsComponent();
+        PlayerInputComponent input = new PlayerInputComponent();
 
-
-
-        homer = new Homer();
-
-        /*
-        homer.addAnimation("Walking", homer.walkAnimation);
-        homer.addAnimation("Running", homer.runAnimation);
-        homer.addAnimation("Jumping", homer.jumpAnimation);
-        */
-        homer.setActiveKeys(activeKeys);
+        homer = new GameObject(input.PlayerInputComponent(physics, graphics), physics.PlayerPhysicsComponent(input, graphics),graphics.PlayerGraphicsComponent(physics, input));
+        homer.setInputKey(activeKeys);
+        homer.setKeys(Input.Keys.A,Input.Keys.D,Input.Keys.SHIFT_LEFT, Input.Keys.W);
 
         Gdx.input.setInputProcessor(this);
     }
-
     @Override
     public void render() {
         deltaTime = Gdx.graphics.getDeltaTime();
@@ -60,7 +56,7 @@ public class BaseGame extends ApplicationAdapter implements InputProcessor {
 
 
         batch.begin();
-        homer.draw(batch);
+        homer.showOnScreen(batch);
         batch.end();
     }
 
@@ -71,17 +67,18 @@ public class BaseGame extends ApplicationAdapter implements InputProcessor {
     }
 
 
+
     @Override
     public boolean keyDown(int keycode) {
         activeKeys[keycode] = true;
-        Gdx.app.log(this.getClass().getSimpleName(), "Key down --> " + keycode);
+
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
         activeKeys[keycode] = false;
-        Gdx.app.log(this.getClass().getSimpleName(), "Key up --> " + keycode);
+
         return false;
     }
 
